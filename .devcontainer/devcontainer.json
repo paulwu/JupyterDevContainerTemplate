@@ -1,6 +1,9 @@
 {
   "name": "Jupyter Data Science",
-  "image": "jupyter/datascience-notebook:latest",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
   
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
@@ -44,23 +47,17 @@
   "forwardPorts": [8888, 8889, 8890],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "pip install -r requirements.txt",
+  "postCreateCommand": "pip install --no-cache-dir -r requirements.txt",
 
   // Configure user permissions
   "remoteUser": "jovyan",
   
-  // Mount the workspace
-  "workspaceMount": "source=${localWorkspaceFolder},target=/home/jovyan/work,type=bind,consistency=cached",
+  // Mount the workspace - optimized for WSL
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/jovyan/work,type=bind",
   "workspaceFolder": "/home/jovyan/work",
 
   // Container environment variables
   "containerEnv": {
-    "JUPYTER_ENABLE_LAB": "yes",
-    "JUPYTER_PORT": "8888"
-  },
-
-  // Additional container arguments
-  "runArgs": [
-    "--name=jupyter-datascience-devcontainer"
-  ]
+    "JUPYTER_ENABLE_LAB": "yes"
+  }
 }

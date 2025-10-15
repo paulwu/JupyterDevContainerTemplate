@@ -1,0 +1,5 @@
+{
+    "dev.containers.dockerPath": "wsl",
+    "dev.containers.dockerComposePath": "wsl",
+    "remote.WSL.fileWatcher.polling": true
+}
